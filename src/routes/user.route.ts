@@ -88,3 +88,14 @@ export const userRoutes: FastifyPluginAsync = async (app) => {
 		},
 	}, deleteUser);
 };
+
+export const healthCheckRoute: FastifyPluginAsync = async (app) => {
+	app.get('/health', async (request, reply) => {
+		reply.send({
+			status: 'ok',
+			uptime:process.uptime(),
+			memoryUsage: process.memoryUsage(),
+			timestamp: new Date().toISOString(),
+		});	
+	});
+}
